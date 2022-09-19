@@ -1,0 +1,359 @@
+PennController.ResetPrefix()
+
+newTrial("Intro", 
+    newText("intro", "<p><strong>Welcome to the Figure Game!</strong></p>")
+        .css("font-size", "2.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print()
+    ,
+    newText("description", "In this game you will drag and drop the figures to different locations on the screen.</p>")
+        .css("font-size", "1.5em")
+        .css("text-align", "center")
+        .settings.center()
+        .print()
+    ,
+        newText("id_prompt", "Enter Participant ID:")
+        .center()
+        .css("font-size", "1.5em")
+        .print()
+      ,
+    newTextInput("idnum")
+        .center()
+        .log("final")
+        .lines(1)
+        .print()
+    ,
+    newText("<p></p>")
+        .center().print()
+    ,
+    newButton("submit", "Submit")
+        .css("font-size", "1.5em")
+        .center()
+        .print()
+        .wait(
+            getButton("submit").test.clicked()
+            .and(getTextInput("idnum").testNot.text("")
+                    .failure(
+                        newText("error", "<p>Please enter the participant's ID.</p>")
+                            .center()
+                            .css("font-size", "1.0em")
+                            .color("red")
+                            .print() 
+                        )
+                    .success(
+                        newVar("subjID")
+                            .global()
+                            .set(getTextInput("idnum"))
+                        )
+                )
+            )
+    ,
+    clear()
+    ).log("id", getVar("subjID"))
+
+newTrial("Set_1",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("woman", "woman_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("boy", "boy_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("woman"))
+       .addDrag(getImage("boy"))
+       .addDrop(getCanvas("grid"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Set_2",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("man", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("boy", "boy_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("man"))
+       .addDrag(getImage("boy"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Set_3",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("rec_1", "rec_one_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_2", "rec_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_3", "rec_three_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("rec_1"))
+       .addDrag(getImage("rec_2"))
+       .addDrag(getImage("rec_3"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Set_4",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("man", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("woman", "woman_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("boy", "boy_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("man"))
+       .addDrag(getImage("woman"))
+       .addDrag(getImage("boy"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Set_5",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("man", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("woman", "woman_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("dog", "dog_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("man"))
+       .addDrag(getImage("woman"))
+       .addDrag(getImage("dog"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+//Missing trial 6 (square, circle, and triangle)
+
+newTrial("Set_7",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("man", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("woman", "woman_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_one", "rec_one_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_two", "rec_one_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("man"))
+       .addDrag(getImage("woman"))
+       .addDrag(getImage("rec_one"))
+       .addDrag(getImage("rec_two"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Set_8",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("woman_one", "woman_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("woman_two", "woman_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_one", "rec_one_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_two", "rec_one_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("woman_one"))
+       .addDrag(getImage("woman_two"))
+       .addDrag(getImage("rec_one"))
+       .addDrag(getImage("rec_two"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Set_9",
+    newCanvas("figlist", "72vw","58vh")
+        .css("padding","1em")
+        .color("lightgray")
+        .print("left at 5vw", "middle at 50vh")
+    ,
+    newCanvas("grid", "72vw", "58vh")
+        .css("padding", "1em")
+        .color("yellow")
+        .print("left at 20vw", "middle at 50vh")
+    ,
+    newSelector("figures")
+    ,
+    newImage("man_one", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("man_two", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("man_three", "man_two_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_one", "rec_one_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_two", "rec_one_small.png").selector("figures").print(getCanvas("figlist")),
+    newImage("rec_three", "rec_one_small.png").selector("figures").print(getCanvas("figlist"))
+    ,
+    getSelector("figures").shuffle()
+    ,
+    newDragDrop("dd")
+       .addDrag(getImage("man_one"))
+       .addDrag(getImage("man_two"))
+       .addDrag(getImage("man_three"))
+       .addDrag(getImage("rec_one"))
+       .addDrag(getImage("rec_two"))
+       .addDrag(getImage("rec_three"))
+       .addDrop(getCanvas("figlist"))
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Task_2",
+    newText("intro_2", "<p><strong>Great job! Let's play another game!<strong><p>")
+        .css("font-size", "2.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print()
+    ,
+    newButton("Continue").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
+
+newTrial("Instructions_2", 
+    newText("intro_two_cont", "In this game you will see sets of figures on the screen. Then, they will disappear and reappear at the bottom. Drag and drop the figures to the locations they appeared originally.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newButton("Let's practice!").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
+
+newTrial("Instructions_3", 
+    newText("intro_three", "Great job! One more game with these figures.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newButton("Next!").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
+
+newTrial("Instructions_3_1", 
+    newText("intro_three_cont", "This time you will see pairs of figures on the screen. After a bit of time, they will disappear. Then, different figures will appear on the screen. Place the new figures exactly where the original ones appeared.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newTimer(7000).start()
+    .wait()
+)
+
+newTrial("Instructions_3_2", 
+    newText("intro_three_cont_1", "For example, you might see a woman, man, and boy figure on the screen. After they dissapear, three more figures will appear but this time they may be three rectangles. The goal is to place the new figures in the exact locations that the original ones had been.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newButton("Let's practice!").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
+
+newTrial("Task_4", 
+    newText("intro_four", "Great job! Let's go on to the last game.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newButton("Next!").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
