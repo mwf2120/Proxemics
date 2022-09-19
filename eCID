@@ -1,0 +1,679 @@
+PennController.ResetPrefix()
+
+newTrial("Instructions_4", 
+    newText("intro_four", "In this game you will see a circle with a figure in the middle. I'd like you to imagine that you are the figure in the middle of a circular room.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newButton("Next").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
+
+newTrial("Instructions_4_1", 
+    newText("intro_4_cont_1", "In each trial a figure will appear on the perimeter of the room with an identity of either 'friend' or 'stranger'. You will also see a dotted line between you, in the middle of the circle/room, and the figure. Please mark the location on the dotted line that you would begin to feel uncomfortable with the figure's location or proximity.")
+    .css("font-size", "1.5em")
+    .css("text-align", "center")
+    .settings.center()
+    .print()
+    ,
+    newButton("Next").print("center at 50vw", "bottom at 99vh")
+    .wait()
+)
+
+newTrial("Room",
+    newText("This is what your room looks like, and that is you in the middle!")
+        .settings.center()
+        .print()
+    ,
+    newImage("center_image", "cid_center.png")
+        .settings.center()
+        .print()
+        .wait()
+    ,
+    newTimer(5000).start()
+        .wait()
+)
+
+newTrial("Stranger_Friend",
+    newText("You will see a 'stranger' or 'friend' identifier like the one below.")
+        .css("font-size", "2.0em")
+        .center()
+        .settings.center()
+        .print()
+    ,
+    newText("<p><strong>Stranger</strong></p")
+        .css("font-size", "2.5em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+        .wait()
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("Fix_Point",
+    newText("Then, you will see a screen that looks like this:")
+        .settings.center()
+        .print()
+    ,
+    newImage("fix", "fix_point.png")
+    ,
+    newCanvas("fixation_canvas"
+        .center()
+        .add("center at 50%", "bottom at 50%"), getImage("fix"))
+        .print()
+        .wait()
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("CID",
+    newText("You will see figures at different locations around the perimeter of the circle. If the previous screen read 'stranger', I'd like you to imagine that the figure is a stranger. If the previous screen read 'friend', I'd like you to imagine that the figure is a friend.")
+        .css("text-align", "center")
+        .settings.center()
+        .print()
+    ,
+    newImage("cid3", "cid3.png")
+    ,
+    newCanvas("canvas_1"
+        .center()
+        .add("center at 50%", "bottom at 50%"), getImage("cid3"))
+        .print()
+        .wait()
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("CID_1",
+    newText("In each trial imagine that the figure is approaching you along the grey dotted line. Using the cursor, click the location on the dotted grey line that you would begin to feel uncomfortable with the figure's location.")
+        .css("text-align", "center")
+        .settings.center()
+        .print()
+    ,
+    newImage("cid3", "cid3.png")
+    ,
+    newCanvas("canvas_2"
+        .center()
+        .add("center at 50%", "bottom at 50%"), getImage("cid_3"))
+        .print()
+        .wait()
+    ,
+    newTimer(5000).start()
+    .wait()
+)
+
+newTrial("CID_2", 
+    newText("You will have up to three seconds to select a location on the grey line. Once you click on the grey line, the next trial will begin. Are you ready to start?")
+        .css("text-align", "center")
+        .settings.center()
+        .print()
+    ,
+    newButton("Continue to the game.").print("center at 50vw", "bottom at 99vh")
+        .wait()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid1", "cid1.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid3", "cid3.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid3", "cid4.5.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid4", "CID6.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid5", "cid5.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid5", "cid5.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid6", "cid9.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid7", "cid7.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("stranger",
+    newText("text", "<p><strong>Stranger</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid8", "cid8.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid1", "cid1.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid3", "cid3.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid3", "cid4.5.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid4", "CID6.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid5", "cid5.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid5", "cid5.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid6", "cid9.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Friend</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid7", "cid7.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+newTrial("Friend",
+    newText("text", "<p><strong>Strr</strong></p")
+        .css("font-size", "4.0em")
+        .css("text-align", "center")
+        .settings.center()
+        .print("center at 50%", "bottom at 50%")
+    ,
+    newTimer(1000).start()
+        .wait()
+    ,
+    getText("text")
+        .remove()
+    ,
+    newImage("fix", "fix_point.png")
+        .print("center at 50%", "bottom at 50%"), getImage("fix")
+        .wait()
+    ,
+    newTimer("Timer1",1000).start()
+    .wait()
+    ,
+    getImage("fix")
+        .remove()
+    ,
+    newImage("cid8", "cid8.png")
+        .center()
+        .print()
+        .wait()
+    ,
+    newTimer(3000).start()
+)
+
+//randomize so that each stranger/friend + position shows up 6 times. 
+//Add mouse click element.
