@@ -1,6 +1,6 @@
 PennController.ResetPrefix()
 
-+Sequence("Instructions_4",randomize("SorF"),randomize("SorF"),randomize("SorF"))
++Sequence("Instructions_4","Room","Stranger_Friend","Fix_Point","CID",randomize("SorF"),randomize("SorF"),randomize("SorF"))
 
 newTrial("Instructions_4", 
     newText("intro_four", "In this game you will see a circle with a figure in the middle. I'd like you to imagine that you are the figure in the middle of a circular room.")
