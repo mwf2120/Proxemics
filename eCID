@@ -1,5 +1,7 @@
 PennController.ResetPrefix()
 
++Sequence("Instructions_4",randomize("SorF"),randomize("SorF"),randomize("SorF"))
+
 newTrial("Instructions_4", 
     newText("intro_four", "In this game you will see a circle with a figure in the middle. I'd like you to imagine that you are the figure in the middle of a circular room.")
     .css("font-size", "1.5em")
@@ -11,7 +13,7 @@ newTrial("Instructions_4",
     .wait()
 )
 
-newTrial("Instructions_4_1", 
+newTrial("Instructions_4", 
     newText("intro_4_cont_1", "In each trial a figure will appear on the perimeter of the room with an identity of either 'friend' or 'stranger'. You will also see a dotted line between you, in the middle of the circle/room, and the figure. Please mark the location on the dotted line that you would begin to feel uncomfortable with the figure's location or proximity.")
     .css("font-size", "1.5em")
     .css("text-align", "center")
@@ -27,13 +29,12 @@ newTrial("Room",
         .settings.center()
         .print()
     ,
-    newImage("center_image", "cid_center.png")
+    newImage("center_image", "cid_center-1.png")
         .settings.center()
         .print()
-        .wait()
     ,
     newTimer(5000).start()
-        .wait()
+        .print()
 )
 
 newTrial("Stranger_Friend",
@@ -48,10 +49,9 @@ newTrial("Stranger_Friend",
         .css("text-align", "center")
         .settings.center()
         .print("center at 50%", "bottom at 50%")
-        .wait()
     ,
     newTimer(5000).start()
-    .wait()
+        .wait()
 )
 
 newTrial("Fix_Point",
@@ -59,13 +59,9 @@ newTrial("Fix_Point",
         .settings.center()
         .print()
     ,
-    newImage("fix", "fix_point.png")
-    ,
-    newCanvas("fixation_canvas"
-        .center()
-        .add("center at 50%", "bottom at 50%"), getImage("fix"))
-        .print()
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
     newTimer(5000).start()
     .wait()
@@ -78,36 +74,28 @@ newTrial("CID",
         .print()
     ,
     newImage("cid3", "cid3.png")
-    ,
-    newCanvas("canvas_1"
         .center()
-        .add("center at 50%", "bottom at 50%"), getImage("cid3"))
+        .settings.center()
         .print()
-        .wait()
     ,
     newTimer(5000).start()
     .wait()
 )
 
 newTrial("CID_1",
-    newText("In each trial imagine that the figure is approaching you along the grey dotted line. Using the cursor, click the location on the dotted grey line that you would begin to feel uncomfortable with the figure's location.")
+    newText("Text1", "In each trial imagine that the figure is approaching you along the grey dotted line. Using the cursor, click the location on the dotted grey line that you would begin to feel uncomfortable with the figure's location.")
         .css("text-align", "center")
         .settings.center()
         .print()
     ,
     newImage("cid3", "cid3.png")
-    ,
-    newCanvas("canvas_2"
         .center()
-        .add("center at 50%", "bottom at 50%"), getImage("cid_3"))
+        .settings.center()
         .print()
-        .wait()
     ,
-    newTimer(5000).start()
-    .wait()
-)
-
-newTrial("CID_2", 
+    getText("Text1")
+        .remove()
+    ,
     newText("You will have up to three seconds to select a location on the grey line. Once you click on the grey line, the next trial will begin. Are you ready to start?")
         .css("text-align", "center")
         .settings.center()
@@ -117,563 +105,830 @@ newTrial("CID_2",
         .wait()
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//1
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid1", "cid1.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", newImage("cid1","cid1.png"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//2
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid3", "cid3.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newImage("cid2", "cid3-1.png")
+    ,
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid2"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//3
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid3", "cid4.5.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid3"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//4
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid4", "CID6.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid4"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//5
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid5", "cid5.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid5"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//6
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid5", "cid5.png")
-        .center()
-        .print()
-        .wait()
-    ,
-    newTimer(3000).start()
-)
-
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
-        .css("font-size", "4.0em")
-        .css("text-align", "center")
-        .settings.center()
-        .print("center at 50%", "bottom at 50%")
-    ,
-    newTimer(1000).start()
-        .wait()
-    ,
-    getText("text")
-        .remove()
-    ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
-    ,
-    newTimer("Timer1",1000).start()
-    .wait()
-    ,
-    getImage("fix")
-        .remove()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid6", "cid9.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid6"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//7
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid7", "cid7.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newImage("cid7", "cid8.png")
+    ,
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid8"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("stranger",
-    newText("text", "<p><strong>Stranger</strong></p")
+//9
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Stranger</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid8", "cid8.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newImage("cid9", "cid9.png")
+    ,
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid9"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
+//add in 12oclock
 
-newTrial("friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//friend
+
+//1
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid1", "cid1.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid1"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//2
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid3", "cid3.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newImage("cid2", "cid3-1.png")
+    ,
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid2"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//3
+
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid3", "cid4.5.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid2"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//4
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid4", "CID6.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid4"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//5
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
+    ,
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid5", "cid5.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid5"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//6
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid5", "cid5.png")
-        .center()
-        .print()
-        .wait()
-    ,
-    newTimer(3000).start()
-)
-
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
-        .css("font-size", "4.0em")
-        .css("text-align", "center")
-        .settings.center()
-        .print("center at 50%", "bottom at 50%")
-    ,
-    newTimer(1000).start()
-        .wait()
-    ,
-    getText("text")
-        .remove()
-    ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
-    ,
-    newTimer("Timer1",1000).start()
-    .wait()
-    ,
-    getImage("fix")
-        .remove()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
     newImage("cid6", "cid9.png")
-        .center()
-        .print()
-        .wait()
     ,
-    newTimer(3000).start()
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid6"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Friend</strong></p")
+//7
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid7", "cid7.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newImage("cid7", "cid8.png")
+    ,
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid7"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
 
-newTrial("Friend",
-    newText("text", "<p><strong>Strr</strong></p")
+//8
+newTrial("SorF",
+    newVar("mousex"),newVar("mousey"),
+    newVar("clickx",[]),newVar("clicky",[])
+    ,
+    newText("Text_2", "<p><strong>Friend</strong></p")
         .css("font-size", "4.0em")
         .css("text-align", "center")
-        .settings.center()
         .print("center at 50%", "bottom at 50%")
     ,
-    newTimer(1000).start()
+    newTimer("Timer0",1000).start()
         .wait()
+        .settings.center()
+        .print()
     ,
-    getText("text")
+    getText("Text_2")
         .remove()
     ,
-    newImage("fix", "fix_point.png")
-        .print("center at 50%", "bottom at 50%"), getImage("fix")
-        .wait()
+    newImage("fix", "fix_point-1.png")
+        .center()
+        .settings.center()
+        .print("middle at 50%", "bottom at 50%")
     ,
-    newTimer("Timer1",1000).start()
+    newTimer("Timer_4",1000).start()
     .wait()
     ,
     getImage("fix")
         .remove()
     ,
-    newImage("cid8", "cid8.png")
-        .center()
-        .print()
-        .wait()
+    newMouseTracker("mouse")
+        .callback( (x,y) => [getVar("mousex").set(x)._runPromises(),getVar("mousey").set(y)._runPromises()])
+        .start()
     ,
-    newTimer(3000).start()
+    newImage("cid9", "last.png")
+    ,
+    newCanvas("screen", "200vw", "200vh").center().print()
+        .add("center at 50%", "bottom at 50%", getImage("cid9"))
+        .print()
+    ,
+    newSelector().add(getCanvas("screen")).callback(
+        getVar("clickx").set(v=>[...v,getVar("mousex").value]),
+        getVar("clicky").set(v=>[...v,getVar("mousey").value])
+    )
+    ,
+    newTimer("Timer_5",3000).start()
+    .wait()
+    ,
+    getVar("clickx").log().set(v=>v.join('.')),
+    getVar("clicky").log().set(v=>v.join('.'))
 )
-
-//randomize so that each stranger/friend + position shows up 6 times. 
-//Add mouse click element.
